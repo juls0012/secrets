@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   password: String
 });
 
-const secret = "Thisisourlittlesecret";
+
 userSchema.plugin(encrypt,{secret:process.env.SECRET,encryptedFields:["password"]});
 
 //Es importante declarar el plugin antes del model
