@@ -1,9 +1,11 @@
+require('dotenv').config(); //Siempre ponerla al principio en la primera linea y poner el .config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const encrypt = require("mongoose-encryption");
 const app = express();
+
 
 //connect db
 mongoose.connect("mongodb://localhost:27017/userDB");
@@ -13,8 +15,8 @@ const userSchema = new mongoose.Schema({
   password: String
 });
 
-const secret = "Thisisoutllitlesecret";
-userSchema.plugin(encrypt,{secret:secret,encryptedFields:["password"]});
+const secret = "Thisisourlittlesecret";
+userSchema.plugin(encrypt,{secret:process.env.SECRET,encryptedFields:["password"]});
 
 //Es importante declarar el plugin antes del model
 
